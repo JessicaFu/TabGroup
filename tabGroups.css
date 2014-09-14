@@ -1,0 +1,201 @@
+body {
+	min-width: 320px;
+	min-height: 300px;
+    overflow-x: hidden;
+    font-family: Sans-serif;
+    background-color:#FFFFF3;
+}
+
+#titleDiv{
+	position: absolute;
+	max-height: 10%;
+	width: 91%;
+	margin: 0% 0% 2% 4%;
+}
+
+#tabGroups{
+	width: 37%;
+	text-align: center;
+	padding: 2px 2px 2px 2px;
+	margin-left: auto;
+    margin-right: auto;
+	font-weight: bold;
+	border-radius: 5px 5px 5px 5px;
+}
+
+#newBttn {
+	text-align: left;
+	padding: 2px 2px 2px 2px;
+	float: left;
+	border: 1px solid #727272;
+	border-radius: 5px 5px 5px 5px;
+	font-weight: bold;
+}
+
+#msgDiv{
+	color: rgb(171,171,171);
+	position: absolute;
+	width: 100%;
+	height: auto;
+	top:20%;
+	text-align: center;
+}
+#mainDiv{
+	display: inline-block;
+	height: 80%;
+	width: 91%;
+	top: 10%;
+	position: absolute;
+	overflow-y:hidden;
+	overflow-x: hidden;
+	margin: 3% 2% 2% 2%;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgb(168,168,168, 0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+.groupDiv{
+	position: relative;
+	height: 100px;
+	width: 280px;
+	margin: 0px 0px 2px 4px;
+	border: 1px solid #727272;
+	border-radius: 5px 5px 5px 5px;
+}
+.groupDiv:hover{
+	height: 105px;
+	width: 286px;
+	left: -3px;
+	border: 2px solid #727272;
+}
+
+.groupName{
+	float: left;
+	position: absolute;
+	max-height: 20px;
+	max-width: 70%;
+	overflow:hidden;
+	white-space: nowrap;
+    text-overflow:ellipsis;
+	margin: 2px 0px 0px 0px;
+	font-size: 100%;
+}
+
+.groupTitleDiv{
+	position: absolute;
+	margin: 2px 0px 2px 2px;
+	font-weight: bold;
+	width: 100%;
+	height: 20px;
+}
+
+.addBttn, .deleteBttn{
+	text-align: center;
+	float: right;
+	display: block;
+	height: 100%;
+	width: 20px;
+	font-weight: bold;
+	margin: 0px 8px 0px 0px;
+	font-size: 100%;
+	border: 1px solid black;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.groupDescDiv{
+	height: 68px;
+	position: absolute;
+	width: 98%;
+	margin: 27px 10px 0px 2px;
+	font-size: 100%;
+	white-space: normal;
+	word-wrap:break-word;
+}
+
+#overlay{	
+	top: 0px;
+	left: 0px;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(249, 253, 208, 0.90);
+	display: none;
+	z-index: 10000;
+}
+
+#editGroupDiv {
+	top: 10%;
+	left: 10%;
+	position: absolute;
+	height: 60%;
+	width: 80%;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid black;
+}
+
+#saveBttn{
+	top: 76%;
+	left: 10%;
+	position: absolute;
+	height: 10%;
+	width: 80%;
+	border-radius: 3px 3px 3px 3px;
+	border: 1px solid black;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 30px;
+}
+
+#editGroupTopDiv{
+	height: 10%;
+	width: 100%;
+	margin: 5px 0px 0px 5px;
+}
+
+#editGroupTitle{
+	width: 65%;
+	float: left;
+	left: 8px;
+	font-weight: bold;
+}
+
+#editGroupExitBttn{
+	border: 1px solid black;
+	right: 8px;
+	position: absolute;
+	text-align: center;
+	width: 20px;
+	border-radius: 3px 3px 3px 3px;
+}
+
+#editGroupMainDiv{
+	margin: 5px 0px 0px 0px;
+}
+
+#titleField{
+	margin: 5px 0px 0px 5%;
+	width: 90%;
+}
+#descField, #urlField{
+	margin: 5px 0px 0px 5%;
+	resize: none;
+	width: 89%; 	
+}
