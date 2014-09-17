@@ -3,7 +3,7 @@ body {
 	min-height: 300px;
     overflow-x: hidden;
     font-family: Sans-serif;
-    background-color:#FFFFF3;
+    background-color:white;
 }
 
 #titleDiv{
@@ -14,26 +14,31 @@ body {
 }
 
 #tabGroups{
-	width: 37%;
+	width: 50%;
 	text-align: center;
 	padding: 2px 2px 2px 2px;
 	margin-left: auto;
     margin-right: auto;
 	font-weight: bold;
+	font-size: 150%;
 	border-radius: 5px 5px 5px 5px;
 }
 
 #newBttn {
 	text-align: left;
-	padding: 2px 2px 2px 2px;
+	padding: 4px 4px 4px 4px;
 	float: left;
-	border: 1px solid #727272;
+	bottom: 4px;
+	position: absolute;
+	background-color: #3399FF;
+	color: white;
 	border-radius: 5px 5px 5px 5px;
 	font-weight: bold;
 }
 
 #msgDiv{
-	color: rgb(171,171,171);
+	color: #297ACC;
+	opacity: 0.7;
 	position: absolute;
 	width: 100%;
 	height: auto;
@@ -76,14 +81,14 @@ body {
 	height: 100px;
 	width: 280px;
 	margin: 0px 0px 2px 4px;
-	border: 1px solid #727272;
+	border: 2px solid #3399FF;
 	border-radius: 5px 5px 5px 5px;
 }
 .groupDiv:hover{
 	height: 105px;
 	width: 286px;
 	left: -3px;
-	border: 2px solid #727272;
+	border: 3px solid #3399FF;
 }
 
 .groupName{
@@ -96,6 +101,7 @@ body {
     text-overflow:ellipsis;
 	margin: 2px 0px 0px 0px;
 	font-size: 100%;
+	color: #3399FF;
 }
 
 .groupTitleDiv{
@@ -115,8 +121,9 @@ body {
 	font-weight: bold;
 	margin: 0px 8px 0px 0px;
 	font-size: 100%;
-	border: 1px solid black;
 	border-radius: 5px 5px 5px 5px;
+	background-color: #3399FF;
+	color: white;
 }
 
 .groupDescDiv{
@@ -135,7 +142,8 @@ body {
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	background-color: rgba(249, 253, 208, 0.90);
+	background-color: white;
+	opacity: 0.9;
 	display: none;
 	z-index: 10000;
 }
@@ -147,7 +155,7 @@ body {
 	height: 60%;
 	width: 80%;
 	border-radius: 5px 5px 5px 5px;
-	border: 1px solid black;
+	border: 3px solid #3399FF;
 }
 
 #saveBttn{
@@ -157,7 +165,8 @@ body {
 	height: 10%;
 	width: 80%;
 	border-radius: 3px 3px 3px 3px;
-	border: 1px solid black;
+	background-color: #3399FF;
+	color: white;
 	font-weight: bold;
 	text-align: center;
 	vertical-align: middle;
@@ -175,10 +184,16 @@ body {
 	float: left;
 	left: 8px;
 	font-weight: bold;
+	color: #3399FF;
+}
+
+input, textarea{
+	border: 1px solid #3399FF;
 }
 
 #editGroupExitBttn{
-	border: 1px solid black;
+	background-color: #3399FF;
+	color: white;
 	right: 8px;
 	position: absolute;
 	text-align: center;

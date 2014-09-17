@@ -50,11 +50,11 @@ function fillMainDiv(){
 function setMouseDownFunc(bttn){
 	bttn.onmousedown=function(evt){
 		evt.stopPropagation();
-		bttn.style.backgroundColor="#FFFF66";
+		bttn.style.backgroundColor="#297ACC";
 	}
 	bttn.onmouseleave=function(evt){
 		evt.stopPropagation();
-		bttn.style.backgroundColor="transparent";
+		bttn.style.backgroundColor="#3399FF";
 	}
 }
 
@@ -196,7 +196,14 @@ function createGroupDiv (group, index){
 	groupDiv.appendChild(groupDescDiv);
 	mainDiv.appendChild(groupDiv);
 
-	setMouseDownFunc(groupDiv);
+	groupDiv.onmousedown=function(evt){
+		evt.stopPropagation();
+		groupDiv.style.backgroundColor="#ADD6FF";
+	};
+	groupDiv.onmouseleave=function(evt){
+		evt.stopPropagation();
+		groupDiv.style.backgroundColor="transparent";
+	};
 	groupDiv.onclick=function(){
 		var list = group.list.split(';');
 		var win;
