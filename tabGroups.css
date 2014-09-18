@@ -36,6 +36,10 @@ body {
 	font-weight: bold;
 }
 
+#newBttn:hover{
+	-webkit-box-shadow: 0 0 10px #ccc;
+}
+
 #msgDiv{
 	color: #297ACC;
 	opacity: 0.7;
@@ -89,6 +93,7 @@ body {
 	width: 286px;
 	left: -3px;
 	border: 3px solid #3399FF;
+	-webkit-box-shadow: 0 0 20px #ccc;
 }
 
 .groupName{
@@ -126,6 +131,10 @@ body {
 	color: white;
 }
 
+.addBttn:hover, .deleteBttn:hover{
+	-webkit-box-shadow: 0 0 15px #ccc;
+}
+
 .groupDescDiv{
 	height: 68px;
 	position: absolute;
@@ -160,7 +169,7 @@ body {
 
 #saveBttn{
 	top: 76%;
-	left: 10%;
+	left: 11%;
 	position: absolute;
 	height: 10%;
 	width: 80%;
@@ -171,6 +180,10 @@ body {
 	text-align: center;
 	vertical-align: middle;
 	line-height: 30px;
+}
+
+#saveBttn:hover{
+	-webkit-box-shadow: 0 0 20px #ccc;
 }
 
 #editGroupTopDiv{
@@ -201,6 +214,10 @@ input, textarea{
 	border-radius: 3px 3px 3px 3px;
 }
 
+#editGroupExitBttn:hover{
+	-webkit-box-shadow: 0 0 10px #ccc;
+}
+
 #editGroupMainDiv{
 	margin: 5px 0px 0px 0px;
 }
@@ -209,8 +226,46 @@ input, textarea{
 	margin: 5px 0px 0px 5%;
 	width: 90%;
 }
-#descField, #urlField{
+
+#descField{
 	margin: 5px 0px 0px 5%;
 	resize: none;
 	width: 89%; 	
+}
+
+#urlAddDiv, #urlHolder{
+	margin: 5px 0px 0px 5%;
+	width: 90%;
+}
+
+#getTabsBttn{
+	width: 50%;
+	height: 20%;
+	background-color: #3399FF;
+	color: white;
+	border-radius: 3px 3px 3px 3px;
+	text-align: center;
+	float: left;
+}
+
+#addUrl{
+	text-align: center;
+	float: right;
+	display: block;
+	height: 100%;
+	width: 20px;
+	font-weight: bold;
+	margin: 0px 0px 0px 8px;
+	font-size: 100%;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #3399FF;
+	color: white;
+}
+
+#addUrl:hover, #getTabsBttn:hover{
+	-webkit-box-shadow: 0 0 10px #ccc;
+}
+
+.urlDiv{
+	width: 100%;
 }

@@ -58,6 +58,7 @@ function setMouseDownFunc(bttn){
 	}
 }
 
+var urlArray;
 function newGroup(){
 	var overlay = document.getElementById("overlay");
 	overlay.style.display = "block";
@@ -65,6 +66,17 @@ function newGroup(){
 	divTitle.innerHTML="Create New Tab Group";
 	var saveBttn = document.getElementById("saveBttn");
 	var exitBttn = document.getElementById("editGroupExitBttn");
+	var getTabsBttn = document.getElementById("getTabsBttn");
+	urlArray = [];
+	getTabsBttn.onclick=function(){
+		chrome.tabs.query({"windowType":"normal", "currentWindow":true}, function(tabs){
+			for (var i=0; i<tabs.length; i++){
+				urlArray.push(tabs[i].url);
+				console.log(tabs[i].url);
+			}
+		});
+	};
+
 	saveBttn.onclick = function(){
 		saveGroup();
 		updateGroupList();
@@ -126,18 +138,18 @@ function deleteGroup(index){
 function saveGroup(){
 	var titleField = document.getElementById("titleField");
 	var descField = document.getElementById("descField");
-	var urlField = document.getElementById("urlField");
+	//var urlField = document.getElementById("urlField");
 
-	if (urlField.value!==""){
+	//if (urlField.value!==""){
 		var group={
 			"title":titleField.value,
 			"desc":descField.value,
-			"list":urlField.value
+			"list":urlArray
 		};
 		tabArray.push(group);
 		tabGroup.groups=tabArray;
 		localStorage.tabGroup = JSON.stringify(tabGroup);
-	}
+	//}
 }
 function updateGroupList(){
 	body.removeChild(mainDiv);
@@ -150,11 +162,11 @@ function updateGroupList(){
 function clearEditGroupOverlay(){
 	var titleField = document.getElementById("titleField");
 	var descField = document.getElementById("descField");
-	var urlField = document.getElementById("urlField");
+	//var urlField = document.getElementById("urlField");
 	var overlay = document.getElementById("overlay");
 	titleField.value="";
 	descField.value="";
-	urlField.value="";
+	//urlField.value="";
 	overlay.style.display="none";
 }
 
@@ -205,10 +217,9 @@ function createGroupDiv (group, index){
 		groupDiv.style.backgroundColor="transparent";
 	};
 	groupDiv.onclick=function(){
-		var list = group.list.split(';');
 		var win;
-		for (var i=0; i<list.length; i++){
-			win = window.open(list[i], "_blank");
+		for (var i=0; i<group.list.length; i++){
+			win = window.open(group.list[i], "_blank");
 		}
 		if (list.length>0){
 			win.focus;
