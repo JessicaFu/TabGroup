@@ -67,6 +67,8 @@ function newGroup(){
 	var saveBttn = document.getElementById("saveBttn");
 	var exitBttn = document.getElementById("editGroupExitBttn");
 	var getTabsBttn = document.getElementById("getTabsBttn");
+	var addUrl = document.getElementById("addUrl");
+
 	urlArray = [];
 	getTabsBttn.onclick=function(){
 		chrome.tabs.query({"windowType":"normal", "currentWindow":true}, function(tabs){
@@ -86,6 +88,18 @@ function newGroup(){
 	exitBttn.onclick =function(){
 		clearEditGroupOverlay();
 	};
+
+	addUrl.onclick = function(){
+		addUrlField();
+	};
+
+	getTabsBttn.onclick = function(){
+		chrome.tabs.query({}, function(tabs) { 
+			for (var i=0; i<tabs.length; i++){
+				addUrlField(tabs[i].url);
+			}
+		});
+	}
 }
 
 function editGroup(index){
@@ -97,27 +111,20 @@ function editGroup(index){
 	divTitle.innerHTML="Edit Tab Group";
 	var saveBttn = document.getElementById("saveBttn");
 	var exitBttn = document.getElementById("editGroupExitBttn");
+	var addUrl = document.getElementById("addUrl");
+	var getTabsBttn = document.getElementById("getTabsBttn");
 
 	var titleField = document.getElementById("titleField");
 	var descField = document.getElementById("descField");
-	var urlField = document.getElementById("urlField");
-
 	titleField.value = group.title;
 	descField.value = group.desc;
-	urlField.value = group.list;
+
+	for (var i =0; i<group.list.length; i++){
+		addUrlField(group.list[i]);
+	}
 
 	saveBttn.onclick = function(){
-		if (urlField.value!==""){
-			var group={
-				"title":titleField.value,
-				"desc":descField.value,
-				"list":urlField.value
-			};
-
-			tabArray[index]=group;
-			tabGroup.groups=tabArray;
-			localStorage.tabGroup = JSON.stringify(tabGroup);
-		}
+		saveGroup(index);
 		updateGroupList();
 		clearEditGroupOverlay();
 	};
@@ -126,6 +133,44 @@ function editGroup(index){
 		clearEditGroupOverlay();
 	};
 
+	addUrl.onclick = function(){
+		addUrlField();
+	};
+
+	getTabsBttn.onclick = function(){
+		chrome.tabs.query({}, function(tabs) { 
+			for (var i=0; i<tabs.length; i++){
+				addUrlField(tabs[i].url);
+			}
+		});
+	}
+}
+
+function addUrlField (url){
+	var urlHolder = document.getElementById("urlHolder");
+
+	function addField (){
+		var urlDiv = document.createElement("div");
+		urlDiv.setAttribute("class", "urlDiv");
+		var urlField = document.createElement("input");
+		urlField.setAttribute("class", "urlField");
+		if (url){
+			urlField.value = url;
+		}
+		urlField.setAttribute("placeholder", "Ex: https://google.com");
+		var deleteUrl = document.createElement("div");
+		deleteUrl.innerHTML = "X";
+		deleteUrl.setAttribute("class", "deleteUrl");
+		deleteUrl.onclick = function (){
+			urlDiv.parentNode.removeChild(urlDiv);
+		}
+
+		urlDiv.appendChild(urlField);
+		urlDiv.appendChild(deleteUrl);
+		urlHolder.appendChild(urlDiv);
+
+	}
+	addField();
 }
 
 function deleteGroup(index){
@@ -135,21 +180,29 @@ function deleteGroup(index){
 	updateGroupList();
 }
 
-function saveGroup(){
+function saveGroup(index){
+	var urlFields = document.getElementsByClassName("urlField");
+	var list = [];
+	for (var i=0; i<urlFields.length;i++){
+		if (urlFields[i].value!==""){
+			list.push(urlFields[i].value);
+		}
+	}
 	var titleField = document.getElementById("titleField");
 	var descField = document.getElementById("descField");
-	//var urlField = document.getElementById("urlField");
+	var group={
+		"title":titleField.value,
+		"desc":descField.value,
+		"list":list
+	};
 
-	//if (urlField.value!==""){
-		var group={
-			"title":titleField.value,
-			"desc":descField.value,
-			"list":urlArray
-		};
+	if (index!=null){
+		tabArray[index]=group;
+	}else {
 		tabArray.push(group);
-		tabGroup.groups=tabArray;
-		localStorage.tabGroup = JSON.stringify(tabGroup);
-	//}
+	}
+	tabGroup.groups=tabArray;
+	localStorage.tabGroup = JSON.stringify(tabGroup);
 }
 function updateGroupList(){
 	body.removeChild(mainDiv);
@@ -166,7 +219,14 @@ function clearEditGroupOverlay(){
 	var overlay = document.getElementById("overlay");
 	titleField.value="";
 	descField.value="";
-	//urlField.value="";
+
+	var urlHolder = document.getElementById("urlHolder");
+	var editGroupMainDiv = document.getElementById("editGroupMainDiv");
+	urlHolder.parentNode.removeChild(urlHolder);
+
+	var newUrlHolder = document.createElement("div");
+	newUrlHolder.setAttribute("id", "urlHolder");
+	editGroupMainDiv.appendChild(newUrlHolder);
 	overlay.style.display="none";
 }
 
@@ -179,11 +239,11 @@ function createGroupDiv (group, index){
 	var title = document.createElement("p");
 	title.setAttribute("class", "groupName");
 	title.innerHTML=group.title;
-	var addBttn = document.createElement("div");
-	addBttn.setAttribute("class", "addBttn");
-	addBttn.innerHTML="+";
-	setMouseDownFunc(addBttn);
-	addBttn.onclick=function(evt){
+	var editBttn = document.createElement("div");
+	editBttn.setAttribute("class", "editBttn");
+	editBttn.innerHTML="Edit";
+	setMouseDownFunc(editBttn);
+	editBttn.onclick=function(evt){
 		evt.stopPropagation();
 		editGroup(index);
 	};
@@ -197,8 +257,8 @@ function createGroupDiv (group, index){
 		deleteGroup(index);
 	};
 	groupTitleDiv.appendChild(title);
-	groupTitleDiv.appendChild(addBttn);
 	groupTitleDiv.appendChild(deleteBttn);
+	groupTitleDiv.appendChild(editBttn);
 
 	var groupDescDiv = document.createElement("div");
 	groupDescDiv.setAttribute("class", "groupDescDiv");
@@ -221,7 +281,7 @@ function createGroupDiv (group, index){
 		for (var i=0; i<group.list.length; i++){
 			win = window.open(group.list[i], "_blank");
 		}
-		if (list.length>0){
+		if (group.list.length>0){
 			win.focus;
 		}
 	};	
