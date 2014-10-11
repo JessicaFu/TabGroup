@@ -233,12 +233,30 @@ function clearEditGroupOverlay(){
 function createGroupDiv (group, index){
 	var groupDiv = document.createElement("div");
 	groupDiv.setAttribute("class", "groupDiv");
+	groupDiv.setAttribute("expanded", "false");
+
 	var groupTitleDiv = document.createElement("div");
 	groupTitleDiv.setAttribute("class", "groupTitleDiv");
 
 	var title = document.createElement("p");
 	title.setAttribute("class", "groupName");
 	title.innerHTML=group.title;
+
+	var openBttn = document.createElement("div");
+	openBttn.setAttribute("class", "openBttn");
+	openBttn.innerHTML="Open";
+	setMouseDownFunc(openBttn);
+	openBttn.onclick=function(evt){
+		evt.stopPropagation();
+		var win;
+		for (var i=0; i<group.list.length; i++){
+			win = window.open(group.list[i], "_blank");
+		}
+		if (group.list.length>0){
+			win.focus;
+		}
+	};	
+
 	var editBttn = document.createElement("div");
 	editBttn.setAttribute("class", "editBttn");
 	editBttn.innerHTML="Edit";
@@ -250,7 +268,7 @@ function createGroupDiv (group, index){
 
 	var deleteBttn = document.createElement("div");
 	deleteBttn.setAttribute("class", "deleteBttn");
-	deleteBttn.innerHTML="-";
+	deleteBttn.innerHTML="X";
 	setMouseDownFunc(deleteBttn);
 	deleteBttn.onclick=function(evt){
 		evt.stopPropagation();
@@ -259,6 +277,7 @@ function createGroupDiv (group, index){
 	groupTitleDiv.appendChild(title);
 	groupTitleDiv.appendChild(deleteBttn);
 	groupTitleDiv.appendChild(editBttn);
+	groupTitleDiv.appendChild(openBttn);
 
 	var groupDescDiv = document.createElement("div");
 	groupDescDiv.setAttribute("class", "groupDescDiv");
@@ -276,13 +295,14 @@ function createGroupDiv (group, index){
 		evt.stopPropagation();
 		groupDiv.style.backgroundColor="transparent";
 	};
-	groupDiv.onclick=function(){
-		var win;
-		for (var i=0; i<group.list.length; i++){
-			win = window.open(group.list[i], "_blank");
+	groupDiv.onclick=function(evt){
+		evt.stopPropagation();
+		if (groupDiv.getAttribute("expanded")=="false"){
+			groupDiv.className = "groupDiv groupDivExpand";
+			groupDiv.setAttribute("expanded", "true");
+		}else {
+			groupDiv.className = "groupDiv groupDivMin";
+			groupDiv.setAttribute("expanded", "false");
 		}
-		if (group.list.length>0){
-			win.focus;
-		}
-	};	
+	};
 }
