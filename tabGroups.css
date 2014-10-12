@@ -82,12 +82,14 @@ body {
 
 .groupDiv{
 	position: relative;
-	height: 25px;
+	height: 30px;
+	background-color: white;
 	width: 280px;
-	margin: 0px 0px 2px 4px;
+	margin: 0px 0px -5px 4px;
 	border: 2px solid #3399FF;
-	border-radius: 5px 5px 5px 5px;
+	border-radius: 10px 10px 5px 5px;
 	overflow: hidden;
+	top: 0;
 }
 /*.groupDiv:hover{
 	height: 105px;
@@ -97,14 +99,14 @@ body {
 	-webkit-box-shadow: 0 0 20px #ccc;
 }*/
 .groupDivExpand{
-	-webkit-transition: 1s;
-	transition: 1s;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
 	height: 100px;
 }
 .groupDivMin{
-	-webkit-transition: 1s;
-	transition: 1s;
-	height: 25px;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	height: 30px;
 }
 
 .groupName{
@@ -154,7 +156,7 @@ body {
 	height: 68px;
 	position: absolute;
 	width: 98%;
-	margin: 27px 10px 0px 2px;
+	margin: 30px 10px 0px 2px;
 	font-size: 100%;
 	white-space: normal;
 	word-wrap:break-word;
@@ -270,17 +272,16 @@ input, textarea{
 	color: white;
 	border-radius: 3px 3px 3px 3px;
 	text-align: center;
-	float: left;
+	float: right;
 }
 
 #addUrl{
 	text-align: center;
-	float: right;
+	float: left;
 	display: block;
 	height: 100%;
 	width: 20px;
 	font-weight: bold;
-	margin: 0px 0px 0px 8px;
 	font-size: 100%;
 	border-radius: 5px 5px 5px 5px;
 	background-color: #3399FF;

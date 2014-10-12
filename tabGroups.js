@@ -6,6 +6,7 @@ if (localStorage.tabGroup){
 	tabGroup = {"groups":[]}; 
 }
 var tabArray = tabGroup.groups;
+var removeRecent = null;
 
 var mainDiv, body;
 window.onload = init;
@@ -56,6 +57,10 @@ function setMouseDownFunc(bttn){
 		evt.stopPropagation();
 		bttn.style.backgroundColor="#3399FF";
 	}
+	bttn.onmouseup=function(evt){
+		evt.stopPropagation();
+		bttn.style.backgroundColor="#3399FF";
+	}
 }
 
 var urlArray;
@@ -69,15 +74,6 @@ function newGroup(){
 	var getTabsBttn = document.getElementById("getTabsBttn");
 	var addUrl = document.getElementById("addUrl");
 
-	urlArray = [];
-	getTabsBttn.onclick=function(){
-		chrome.tabs.query({"windowType":"normal", "currentWindow":true}, function(tabs){
-			for (var i=0; i<tabs.length; i++){
-				urlArray.push(tabs[i].url);
-				console.log(tabs[i].url);
-			}
-		});
-	};
 
 	saveBttn.onclick = function(){
 		saveGroup();
@@ -94,7 +90,7 @@ function newGroup(){
 	};
 
 	getTabsBttn.onclick = function(){
-		chrome.tabs.query({}, function(tabs) { 
+		chrome.tabs.query({"windowType":"normal", "currentWindow":true}, function(tabs) { 
 			for (var i=0; i<tabs.length; i++){
 				addUrlField(tabs[i].url);
 			}
@@ -138,7 +134,7 @@ function editGroup(index){
 	};
 
 	getTabsBttn.onclick = function(){
-		chrome.tabs.query({}, function(tabs) { 
+		chrome.tabs.query({"windowType":"normal", "currentWindow":true}, function(tabs) { 
 			for (var i=0; i<tabs.length; i++){
 				addUrlField(tabs[i].url);
 			}
@@ -193,7 +189,8 @@ function saveGroup(index){
 	var group={
 		"title":titleField.value,
 		"desc":descField.value,
-		"list":list
+		"list":list, 
+		"recent":false
 	};
 
 	if (index!=null){
@@ -248,6 +245,10 @@ function createGroupDiv (group, index){
 	setMouseDownFunc(openBttn);
 	openBttn.onclick=function(evt){
 		evt.stopPropagation();
+		removeRecent && removeRecent();
+		group.recent = true;
+		console.log(tabGroup);
+		localStorage.tabGroup = JSON.stringify(tabGroup);
 		var win;
 		for (var i=0; i<group.list.length; i++){
 			win = window.open(group.list[i], "_blank");
@@ -287,6 +288,16 @@ function createGroupDiv (group, index){
 	groupDiv.appendChild(groupDescDiv);
 	mainDiv.appendChild(groupDiv);
 
+	if (group.recent){
+		groupDiv.className = "groupDiv groupDivExpand";
+		groupDiv.setAttribute("expanded", "true");
+		removeRecent = function(){
+			group.recent = false;
+		}
+	}
+	//makeDraggable(groupDiv);
+
+/*
 	groupDiv.onmousedown=function(evt){
 		evt.stopPropagation();
 		groupDiv.style.backgroundColor="#ADD6FF";
@@ -295,6 +306,7 @@ function createGroupDiv (group, index){
 		evt.stopPropagation();
 		groupDiv.style.backgroundColor="transparent";
 	};
+*/
 	groupDiv.onclick=function(evt){
 		evt.stopPropagation();
 		if (groupDiv.getAttribute("expanded")=="false"){
