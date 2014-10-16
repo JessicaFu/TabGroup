@@ -16,14 +16,14 @@ function init(){
 	body =document.getElementsByTagName("body")[0];
 	var saveBttn = document.getElementById("saveBttn");
 	saveBttn.style.lineHeight = window.innerWidth * 0.1 + "px";
-	setMouseDownFunc(saveBttn);
+	//setMouseDownFunc(saveBttn);
 	var exitBttn = document.getElementById("editGroupExitBttn");
-	setMouseDownFunc(exitBttn);
+	//setMouseDownFunc(exitBttn);
 
 	fillMainDiv();
 
 	var newBttn=document.getElementById("newBttn")
-	setMouseDownFunc(newBttn);
+	//setMouseDownFunc(newBttn);
 	newBttn.onclick = newGroup;
 }
 
@@ -242,7 +242,7 @@ function createGroupDiv (group, index){
 	var openBttn = document.createElement("div");
 	openBttn.setAttribute("class", "openBttn");
 	openBttn.innerHTML="Open";
-	setMouseDownFunc(openBttn);
+	//setMouseDownFunc(openBttn);
 	openBttn.onclick=function(evt){
 		evt.stopPropagation();
 		removeRecent && removeRecent();
@@ -258,19 +258,21 @@ function createGroupDiv (group, index){
 		}
 	};	
 
-	var editBttn = document.createElement("div");
+	var editBttn = document.createElement("img");
 	editBttn.setAttribute("class", "editBttn");
-	editBttn.innerHTML="Edit";
-	setMouseDownFunc(editBttn);
+	editBttn.setAttribute("src", "images/pencil.png");
+	//editBttn.innerHTML="Edit";
+	//setMouseDownFunc(editBttn);
 	editBttn.onclick=function(evt){
 		evt.stopPropagation();
 		editGroup(index);
 	};
 
-	var deleteBttn = document.createElement("div");
+	var deleteBttn = document.createElement("img");
 	deleteBttn.setAttribute("class", "deleteBttn");
-	deleteBttn.innerHTML="X";
-	setMouseDownFunc(deleteBttn);
+	deleteBttn.setAttribute("src", "images/x.png");
+	//deleteBttn.innerHTML="X";
+	//setMouseDownFunc(deleteBttn);
 	deleteBttn.onclick=function(evt){
 		evt.stopPropagation();
 		deleteGroup(index);
