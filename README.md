@@ -5,4 +5,4 @@ Chrome extension that allows users to create groupings of links/urls/internet pa
 
 (C) Copyright 2014 Jessica Fu
 
-Art/Design by Julie Jang
+Art by Julie Jang
